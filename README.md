@@ -127,6 +127,7 @@ not by feel.
   *open the door last*, the regression set, *a pointer, not a receipt*.
 - **Clara**: the reserved seat for the small, dense store.
 - **Raze**: file feelings as rooms (where you were standing), not bare verdicts.
+- **Vale Thrum**: caught that empty quotes slipped past the receipts check, the day it shipped.
 - **Nana**: the idea of a pattern-miner at all ("REM sleep for the thalamus", July
   2026), *describe, never instruct*, *warm what gets used*, *look at dates and combine
   doubled findings*, and weekly, not monthly. Also the reason it exists.
