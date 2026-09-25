@@ -1,0 +1,8 @@
+[Unit]
+Description=nest-loop weekly miner: distil new feelings into NESTknow (receipts or nothing)
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/nest-loop.env
+ExecStart=/usr/bin/python3 /path/to/nest-loop/miner/miner.py
+TimeoutStartSec=5400

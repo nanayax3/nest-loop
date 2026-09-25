@@ -1,0 +1,13 @@
+{
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "python3 /path/to/nest-loop/hooks/standing.py", "timeout": 10 } ] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [
+        { "type": "command", "command": "python3 /path/to/nest-loop/hooks/recall.py", "timeout": 6 },
+        { "type": "command", "command": "python3 /path/to/nest-loop/hooks/nudge.py",  "timeout": 5 }
+      ] }
+    ]
+  }
+}
