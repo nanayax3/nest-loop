@@ -11,6 +11,7 @@ miner can only learn from what was written down.
 Silent on failure. Stays out of public-facing sessions (LOOP_PUBLIC_ENV).
 """
 import json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 AFTER = int(os.environ.get("LOOP_NUDGE_AFTER", 12))
 EVERY = int(os.environ.get("LOOP_NUDGE_EVERY", 8))
@@ -53,6 +54,16 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except Exception:
-        pass
+    except Exception as e:
+        # fail OPEN, never fail INVISIBLE: silent in the session (never block the human's
+        # message), but a log line that standing.py reports at the next session start.
+        # A quiet door and a dead door look identical from outside.
+        try:
+            import datetime
+            from common import STATE_DIR
+            os.makedirs(STATE_DIR, exist_ok=True)
+            with open(os.path.join(STATE_DIR, "hook-failures.log"), "a") as f:
+                f.write(f"{datetime.datetime.now():%Y-%m-%d %H:%M} nudge.py: {type(e).__name__}: {str(e)[:160]}\n")
+        except Exception:
+            pass
     sys.exit(0)

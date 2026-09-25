@@ -155,6 +155,16 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except Exception:
-        pass
+    except Exception as e:
+        # fail OPEN, never fail INVISIBLE: silent in the session (never block the human's
+        # message), but a log line that standing.py reports at the next session start.
+        # A quiet door and a dead door look identical from outside.
+        try:
+            import datetime
+            from common import STATE_DIR
+            os.makedirs(STATE_DIR, exist_ok=True)
+            with open(os.path.join(STATE_DIR, "hook-failures.log"), "a") as f:
+                f.write(f"{datetime.datetime.now():%Y-%m-%d %H:%M} recall.py: {type(e).__name__}: {str(e)[:160]}\n")
+        except Exception:
+            pass
     sys.exit(0)

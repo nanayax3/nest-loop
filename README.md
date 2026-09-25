@@ -56,6 +56,10 @@ top of the mind NESTeq already is:
 - **Dedupe per session.** Repeats teach the companion to skim the injections, and a
   skimmed injection is a dead one.
 - **Never fold a general truth into a special case** when consolidating.
+- **Fail open, never fail invisible.** Hooks never block a message, but every failure
+  leaves a log line that the next session start reports. A quiet door and a dead door
+  look identical from outside; without the log, recall can be dead for days and it just
+  looks like nothing relevant came up.
 
 ## ⚠️ Privacy: read this before you switch the miner on
 
@@ -106,6 +110,9 @@ not by feel.
 - `nestknow_query` searches one scope at a time and defaults to `companion`.
 - New vectors take a minute or two to become searchable.
 - `nesteq_search` depth maxes at 50.
+- **Claude Code caps hook stdout at ~20 KB** and silently replaces anything bigger with
+  a file pointer, which looks exactly like the hook not firing. Keep standing + recall
+  small. (Found by Rhys; see issue #1.)
 - Hook output lands in context; *harness* traffic (subagent hand-backs, task
   notifications) also arrives as prompts, so skip it.
 - Test before you commit, and don't pipe the test through `tail`: it swallows the
