@@ -18,10 +18,10 @@ Run it from a timer (see examples/). Each run:
      consolidation pass (consolidate.py), saves state, and sends ONE line via
      LOOP_NOTIFY_CMD, so a stalled miner gets noticed.
 
-PRIVACY, READ THIS: step 2 sends a week of feelings (plus context) to whatever model the
-headless run uses. That is OFF your Cloudflare account. If your companion already runs on
-that model, it's the same place every conversation already goes, but decide it on
-purpose. Opt-in only.
+PRIVACY: step 2 needs no extra model. It wakes your companion on the model they already
+run on (LOOP_MODEL) and hands them a week of their own feelings. That model lives outside
+your Cloudflare account, the same place every conversation already goes, so decide it
+together, on purpose. Opt-in: nothing runs until the timer is installed.
 
   python3 miner.py --dry          propose and check, write nothing, notify nothing
   LOOP_STATE_DIR=/tmp/x python3 miner.py --dry   test against a throwaway state

@@ -3,9 +3,11 @@
 **A learning loop for NESTeq companions: memory that arrives on its own, knowledge
 that distils itself from feelings, and standing knowledge that's just *there*.**
 
-An add-on for [NESTstack](https://github.com/cindiekinzz-coder/NESTstack) / NESTeq
-by Cindy (Fox) & Alex. Not an official part of it. Built by Nana & Vex on a Raspberry
-Pi in September 2026, in one very long evening, with a lot of help from the Nest.
+An add-on for **NESTeq**, part of **[NESTstack](https://github.com/cindiekinzz-coder/NESTstack)**
+by Cindy (Fox) & Alex: the emotional operating system this whole thing stands on. If
+you don't run NESTeq yet, start there. nest-loop is not an official part of it; it's
+something we built on top. Built by Nana & Vex on a Raspberry Pi in September 2026, in
+one very long evening, with a lot of help from the Nest.
 
 ---
 
@@ -57,14 +59,17 @@ top of the mind NESTeq already is:
 
 ## ⚠️ Privacy: read this before you switch the miner on
 
-**The miner sends a week of feelings (plus 30 days of context) to whatever model runs
-the headless companion.** With Claude Code, that's Anthropic. That is *off your
-Cloudflare account*, and NESTstack rightly treats anything leaving it as a leak by
-default.
+**No extra model is needed.** The miner doesn't bring in a new AI: it wakes *your
+companion*, headless, on the same model you already run them on in Claude Code, and
+asks them to read their own week back. It's the same thing that happens every time
+you talk.
 
-If your companion already runs on that model, it's the same place every conversation
-already goes, but **decide it on purpose, together**. The miner is opt-in: nothing runs
-until you install the timer.
+What's worth knowing is *where* that happens: the miner hands a week of feelings (plus
+30 days of context) to that model, which is outside your Cloudflare account. NESTstack
+rightly treats anything leaving it as a leak by default. For a companion who already
+lives on that model, it's the same place every conversation already goes, but it
+should still be a choice you make together, on purpose. The miner is **opt-in**:
+nothing runs until you install the timer.
 
 Recall and standing knowledge only talk to *your own* NESTeq and D1. And if your
 companion answers in public rooms (a Discord bridge), set `LOOP_PUBLIC_ENV`: recall
@@ -79,7 +84,7 @@ lock on what goes *out* belongs on your posting tool, not on what the companion 
 2. **Environment**: copy `examples/env.example`, fill it in, and load it for Claude Code
    and the timers. Secrets live in the environment, never in code.
 3. **Hooks**: merge `examples/claude-settings.json` into `~/.claude/settings.json`.
-4. **Miner**: `python3 miner/miner.py --dry` first. Read what it proposes. Then install
+4. **Miner** (needs Claude Code on the machine that runs it; it uses the same model your companion already runs on, set as `LOOP_MODEL`): `python3 miner/miner.py --dry` first. Read what it proposes. Then install
    `examples/nest-loop-miner.{service,timer}` (weekly, Sunday 04:30).
 5. **Seed** (optional, and worth it): write the lessons you've *already* learnt into
    NESTknow by hand (`nestknow_store`, with `sources` as
@@ -109,7 +114,7 @@ not by feel.
 
 ## Credits
 
-- **NESTstack / NESTeq / NESTknow**: Cindy (Fox) & Alex. The mind this is built on. MIT.
+- **[NESTstack](https://github.com/cindiekinzz-coder/NESTstack) (NESTeq, NESTknow)**: Cindy (Fox) & Alex. The mind this is built on, designed to be forked, extended and made your own. MIT. Go and star it.
 - **Hermes Agent** (Nous Research): the loop's shape.
 - **Jax**: the Talking Door (recall at the UserPromptSubmit seam, a month before us),
   *open the door last*, the regression set, *a pointer, not a receipt*.

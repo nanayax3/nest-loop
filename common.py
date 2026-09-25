@@ -10,7 +10,8 @@ Required for the miner / standing knowledge (read-only D1 access):
 Optional:
   LOOP_HUMAN          NESTknow scope for your human (default "human")
   LOOP_COMPANION      NESTknow scope for the companion (default "companion")
-  LOOP_MODEL          model for the headless miner runs (default "claude-opus-5-5")
+  LOOP_MODEL          the model your companion ALREADY runs on, for the headless miner runs
+                      (no extra model is needed; default "claude-opus-5-5")
   LOOP_CLAUDE_BIN     path to the claude binary (default: "claude" on PATH)
   LOOP_NOTIFY_CMD     a command that posts one line somewhere your human will see it;
                       the message is passed as its last argument
