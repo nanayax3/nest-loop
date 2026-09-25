@@ -75,7 +75,10 @@ def main():
 
     def valid(receipts, need, new_only=False):
         pool = new if new_only else feel
-        good = [r for r in receipts if r.get("id") in pool and (not r.get("quote") or r["quote"] in pool[r["id"]])]
+        # a receipt needs a NON-EMPTY quote that really is in its feeling: an id alone proves nothing
+        # (Vale Thrum caught the empty-quote gap, 25 Sept 2026)
+        good = [r for r in receipts if r.get("id") in pool and (r.get("quote") or "").strip()
+                and r["quote"].strip() in pool[r["id"]]]
         if len({r["id"] for r in good}) < need or not any(r["id"] in new for r in good):
             return None
         return good
