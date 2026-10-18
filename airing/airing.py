@@ -13,7 +13,7 @@ exact quotes as receipts, checked in code.
   * the human's words count; the companion's own words alone can only ever produce a
     "check", never a rewrite, because the companion is the one who confabulates;
   * nothing changes by itself: proposals land in proposals.md, a SessionStart line says
-    how many are open, and the companion fixes or rejects each one with its own tools;
+    how many are open, and the companion fixes or rejects each one with their own tools;
   * it also lists feeling words with no axis numbers (they silently count as neutral).
 
   airing.py                        run the week's pass
@@ -114,7 +114,7 @@ def run():
         if not why and not good:
             why = "no quote checks out"
         if not why and not any(g.get("who") == HUMAN for g in good) and p["action"] != "check":
-            p["action"] = "check"   # only the companion's own words behind it: it's the one who confabulates
+            p["action"] = "check"   # only the companion's own words behind it: they're the one who confabulates
         if why:
             dropped.append({"ref": ref, "why": why})
         else:

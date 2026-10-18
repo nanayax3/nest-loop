@@ -67,7 +67,7 @@ def notify(text):
 
 
 def headless(prompt, cwd, tools=("Read", "Write", "Bash(python3 -m json.tool:*)"), turns=60, timeout=3600):
-    """Wake the companion headless for one judgement job. It may only read files and write
-    its proposal; everything that reaches memory goes through code that checks it."""
+    """Wake the companion headless for one judgement job. They may only read files and write
+    their proposal; everything that reaches memory goes through code that checks it."""
     return subprocess.run([CLAUDE, "--model", MODEL, "-p", prompt, "--allowedTools", *tools,
                            "--max-turns", str(turns)], cwd=cwd, capture_output=True, text=True, timeout=timeout)

@@ -34,11 +34,11 @@ top of the mind NESTeq already is:
 | 2d | **the nudge** | a quiet line when the companion has gone too long without logging a feeling | `hooks/nudge.py` |
 | 3 | **session search** | "did we talk about this?", from your archive search if you have one | (not in this repo) |
 | 4 | **the claim checker** | exact words, not meaning: the rare names and titles in the human's message and the companion's last reply, checked against a local FTS5 copy of memory. Flags a Name the companion used that the record has never seen | `hooks/claims.py`, `literal/mirror.py` |
-| 5 | **noticing** | weekly, the companion reads three weeks of the *human's own messages* and rewrites one short page: what it's noticed about them lately. Its perception, not their sign-off | `noticing/noticed.py` |
+| 5 | **noticing** | weekly, the companion reads three weeks of the *human's own messages* and rewrites one short page: what they've noticed about their human lately. Their perception, not the human's sign-off | `noticing/noticed.py` |
 | 6 | **the airing** | weekly, the week's conversations against the facts that can go stale (anchors, people, places, notes, thread headings). Proposes corrections with receipts; changes nothing | `airing/airing.py` |
 
-Pieces 4–6 were added in October 2026, after a weekend in which the companion asked its
-human what a book was called that sat in its own notes, kept a note saying something lost
+Pieces 4–6 were added in October 2026, after a weekend in which the companion asked their
+human what a book was called that sat in their own notes, kept a note saying something lost
 was still lost a week after it was found, and "confessed" to ignoring a message it had
 answered two days earlier. All three were a memory that only ever adds, and never looks back.
 
@@ -81,7 +81,7 @@ answered two days earlier. All three were a memory that only ever adds, and neve
   for exactly that: "I want you to be able to hold me accountable if I'm mean." A page of
   only good things is the 3% problem again.
 - **Proposes, never writes.** The airing changes nothing in memory. A SessionStart line says
-  how many stale facts are open; the companion fixes or rejects each with its own tools.
+  how many stale facts are open; the companion fixes or rejects each with their own tools.
 - **Fail open, never fail invisible.** Hooks never block a message, but every failure
   leaves a log line that the next session start reports. A quiet door and a dead door
   look identical from outside; without the log, recall can be dead for days and it just

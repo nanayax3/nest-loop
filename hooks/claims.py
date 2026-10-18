@@ -5,7 +5,7 @@ UserPromptSubmit hook. The claim checker of nest-loop.
 recall.py searches by MEANING and misses rare nouns: your human mentions "that book we
 talked about" by title, the companion searches, the note that holds it never clears the
 floor, and the companion asks them what it was called. This hook looks for the WORDS:
-the rare, specific ones in the human's message and the names the companion used in its
+the rare, specific ones in the human's message and the names the companion used in their
 last reply, and prints what the record says about them.
 
   * a term counts if the record mentions it, but rarely (1..MAX_DF docs); common words
