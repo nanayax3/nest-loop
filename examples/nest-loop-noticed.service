@@ -1,0 +1,8 @@
+[Unit]
+Description=nest-loop noticing: rewrite the companion's page about their human, from the human's own words
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/nest-loop.env
+ExecStart=/usr/bin/python3 /path/to/nest-loop/noticing/noticed.py
+TimeoutStartSec=3700

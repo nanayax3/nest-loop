@@ -1,0 +1,9 @@
+[Unit]
+Description=nest-loop noticing, weekly: Sunday 05:30, after the miner
+
+[Timer]
+OnCalendar=Sun *-*-* 05:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

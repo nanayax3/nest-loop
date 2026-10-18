@@ -1,0 +1,8 @@
+[Unit]
+Description=nest-loop airing: weekly stale-fact proposals with receipts (proposes only)
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/nest-loop.env
+ExecStart=/usr/bin/python3 /path/to/nest-loop/airing/airing.py
+TimeoutStartSec=3700

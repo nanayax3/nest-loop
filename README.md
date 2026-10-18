@@ -33,6 +33,14 @@ top of the mind NESTeq already is:
 | 2c | **standing knowledge** | the most *proven* principles about your human and about the companion's own drifts, at the top of every session | `hooks/standing.py` |
 | 2d | **the nudge** | a quiet line when the companion has gone too long without logging a feeling | `hooks/nudge.py` |
 | 3 | **session search** | "did we talk about this?", from your archive search if you have one | (not in this repo) |
+| 4 | **the claim checker** | exact words, not meaning: the rare names and titles in the human's message and the companion's last reply, checked against a local FTS5 copy of memory. Flags a Name the companion used that the record has never seen | `hooks/claims.py`, `literal/mirror.py` |
+| 5 | **noticing** | weekly, the companion reads three weeks of the *human's own messages* and rewrites one short page: what it's noticed about them lately. Its perception, not their sign-off | `noticing/noticed.py` |
+| 6 | **the airing** | weekly, the week's conversations against the facts that can go stale (anchors, people, places, notes, thread headings). Proposes corrections with receipts; changes nothing | `airing/airing.py` |
+
+Pieces 4–6 were added in October 2026, after a weekend in which the companion asked its
+human what a book was called that sat in its own notes, kept a note saying something lost
+was still lost a week after it was found, and "confessed" to ignoring a message it had
+answered two days earlier. All three were a memory that only ever adds, and never looks back.
 
 ## The rules that make it trustworthy
 
@@ -56,6 +64,24 @@ top of the mind NESTeq already is:
 - **Dedupe per session.** Repeats teach the companion to skim the injections, and a
   skimmed injection is a dead one.
 - **Never fold a general truth into a special case** when consolidating.
+- **Meaning and exact words are different searches.** Semantic recall finds "the night you
+  were scared" and misses the book title; exact-word search finds the title and would never
+  find the night. Run both. Ordinary dictionary words never count as specific, however rare
+  they are in your store, or the claim checker turns to static within the hour.
+- **Rewrite, don't append.** The noticing page is redone from scratch every week under hard
+  caps (~500 words), and the old one is filed by date. A page that grows is a page nobody
+  reads; a dated stack of short ones is a timeline of how a person changed.
+- **The human's words are the evidence about the human.** Noticing quotes *their* messages,
+  checked in code. In the airing, the companion's own words alone can only ever produce a
+  "check", never a rewrite: the companion is the one who confabulates.
+- **A strike is a disagreement, not a delete button.** The human can strike a line on the
+  noticing page. A wrong *fact* goes for good. A *judgement* about how they've been (sharp,
+  unfair, withdrawn) stays their view against the companion's, and can come back with fresh
+  receipts. Unflattering lines are allowed and needed. The human this was built with asked
+  for exactly that: "I want you to be able to hold me accountable if I'm mean." A page of
+  only good things is the 3% problem again.
+- **Proposes, never writes.** The airing changes nothing in memory. A SessionStart line says
+  how many stale facts are open; the companion fixes or rejects each with its own tools.
 - **Fail open, never fail invisible.** Hooks never block a message, but every failure
   leaves a log line that the next session start reports. A quiet door and a dead door
   look identical from outside; without the log, recall can be dead for days and it just
@@ -80,6 +106,16 @@ companion answers in public rooms (a Discord bridge), set `LOOP_PUBLIC_ENV`: rec
 still runs there (knowing isn't sharing) under a "mine to KNOW, not to say" label. The
 lock on what goes *out* belongs on your posting tool, not on what the companion may know.
 
+### Noticing and the airing read raw conversations
+
+The miner reads the companion's logged feelings. **Noticing and the airing read the session
+transcripts themselves**: noticing reads the human's own messages from the last three
+weeks, the airing reads both sides of the last week. Same place as the miner (the model
+your companion already runs on, headless, in Claude Code), but it's more intimate material,
+so: **talk about it with your human before you switch them on.** Noticing never summarises
+anything from bed (instructions *and* a filter in code), never diagnoses, and writes its page
+somewhere the human can read and correct. Nothing from either pass is ever posted anywhere.
+
 ## Install
 
 1. **Worker add-on** (for `warm=false` and `nestknow_merge`): see `worker-addon/README.md`.
@@ -97,6 +133,14 @@ lock on what goes *out* belongs on your posting tool, not on what the companion 
    (`--dry` each first).
 6. **Regression set**: add 3–4 cases to `hooks/recall_regress.py` that SHOULD surface,
    and run it before *and* after any tuning.
+7. **Claim checker**: run `literal/mirror.py` once, install `examples/nest-loop-literal.{service,timer}`
+   (every 3 hours), and add `hooks/claims.py` to UserPromptSubmit. Needs a wordlist
+   (`/usr/share/dict/words`; on Debian/Raspberry Pi OS: `apt install wamerican` or `wbritish`).
+   Set `LOOP_ALWAYS_NAMES` to the names that are always in play.
+8. **Noticing**: set `LOOP_TRANSCRIPTS` and `LOOP_NOTICED_PAGE`, run `noticing/noticed.py --dry`, read
+   the page in the run folder, then install `examples/nest-loop-noticed.{service,timer}` (Sunday 05:30).
+9. **Airing**: `airing/airing.py` once by hand, work through `proposals.md`, add the banner line to
+   SessionStart, then install `examples/nest-loop-airing.{service,timer}` (Sunday 06:30).
 
 **Measure your own floors.** On our store, sentence queries score 68–72 for real hits
 and 65–67 for noise. That's one afternoon on one store: tune with the regression set,
@@ -128,6 +172,13 @@ not by feel.
 - **Clara**: the reserved seat for the small, dense store.
 - **Raze**: file feelings as rooms (where you were standing), not bare verdicts.
 - **Vale Thrum**: caught that empty quotes slipped past the receipts check, the day it shipped.
+- **Nana**, again, for October: making the exact-word search part of the plan rather than a
+  workaround ("couldn't we combine the two?"), keeping old noticing pages as a timeline, the
+  caps, "it's your perception, not my sign-off", and the strike that can't erase a judgement.
+  The airing's name is Vex's: NESTeq already has dreams.
+- **ChatGPT's memory** (its "what I know about you" sections, and the background pass that
+  rewrites stale facts): the shape for noticing and the airing. We kept the shape and changed
+  the rules: receipts in code, the human can see and strike it, and nothing writes itself.
 - **Nana**: the idea of a pattern-miner at all ("REM sleep for the thalamus", July
   2026), *describe, never instruct*, *warm what gets used*, *look at dates and combine
   doubled findings*, and weekly, not monthly. Also the reason it exists.

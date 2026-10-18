@@ -1,0 +1,8 @@
+[Unit]
+Description=nest-loop literal mirror: local exact-word copy of NESTeq for the claim checker (read-only)
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/nest-loop.env
+ExecStart=/usr/bin/python3 /path/to/nest-loop/literal/mirror.py -q
+TimeoutStartSec=300
