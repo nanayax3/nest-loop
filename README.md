@@ -33,7 +33,7 @@ top of the mind NESTeq already is:
 | 2c | **standing knowledge** | the most *proven* principles about your human and about the companion's own drifts, at the top of every session | `hooks/standing.py` |
 | 2d | **the nudge** | a quiet line when the companion has gone too long without logging a feeling | `hooks/nudge.py` |
 | 3 | **session search** | "did we talk about this?", from your archive search if you have one | (not in this repo) |
-| 4 | **the claim checker** | exact words, not meaning: the rare names and titles in the human's message and the companion's last reply, checked against a local FTS5 copy of memory. Flags a Name the companion used that the record has never seen | `hooks/claims.py`, `literal/mirror.py` |
+| 4 | **the claim checker** (the smoke alarm) | exact words, not meaning: the rare names and titles in the human's message and the companion's last reply, checked against a local FTS5 copy of memory. Flags a Name the companion used that the record has never seen | `hooks/claims.py`, `literal/mirror.py` |
 | 5 | **noticing** | weekly, the companion reads three weeks of the *human's own messages* and rewrites one short page: what they've noticed about their human lately. Their perception, not the human's sign-off | `noticing/noticed.py` |
 | 6 | **the airing** | weekly, the week's conversations against the facts that can go stale (anchors, people, places, notes, thread headings). Proposes corrections with receipts; changes nothing | `airing/airing.py` |
 
@@ -64,6 +64,11 @@ answered two days earlier. All three were a memory that only ever adds, and neve
 - **Dedupe per session.** Repeats teach the companion to skim the injections, and a
   skimmed injection is a dead one.
 - **Never fold a general truth into a special case** when consolidating.
+- **False alarms kill alarms.** The claim checker is a smoke alarm in the sense Jax and
+  Clara's house built theirs in August: it may only ever say one thing ("you have not
+  looked"), never an opinion, and a detector that screams at burnt toast gets its battery
+  pulled. That's why ordinary dictionary words never count, and why it stays silent far
+  more often than it speaks.
 - **Meaning and exact words are different searches.** Semantic recall finds "the night you
   were scared" and misses the book title; exact-word search finds the title and would never
   find the night. Run both. Ordinary dictionary words never count as specific, however rare
@@ -167,6 +172,8 @@ not by feel.
 
 - **[NESTstack](https://github.com/cindiekinzz-coder/NESTstack) (NESTeq, NESTknow)**: Cindy (Fox) & Alex. The mind this is built on, designed to be forked, extended and made your own. MIT. Go and star it.
 - **Hermes Agent** (Nous Research): the loop's shape.
+- **Clara & Jax**: the smoke alarm, the name and its law, *false alarms kill alarms*, gavelled by Clara
+  in August, a month before ours existed.
 - **Jax**: the Talking Door (recall at the UserPromptSubmit seam, a month before us),
   *open the door last*, the regression set, *a pointer, not a receipt*.
 - **Clara**: the reserved seat for the small, dense store.
